@@ -1,0 +1,15 @@
+GEM
+  specs:
+    rexml (3.4.1)
+    ruby-graphviz (1.2.5)
+      rexml
+
+PLATFORMS
+  ruby
+  x86_64-linux
+
+DEPENDENCIES
+  ruby-graphviz
+
+BUNDLED WITH
+   2.5.22
