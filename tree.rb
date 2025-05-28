@@ -11,11 +11,14 @@ def buildDirTree(parentDir)
 end
 
 def buildDirMap(parentDir, dirMap)
-    
+    parentDir.children.each do |childDir|
+      
+    end
 end
 
 
 class Directory
+    attr_reader :myPath, :children
     def initialize(dirName, path)
     @myDirName = dirName
     @myPath = path
@@ -23,14 +26,6 @@ class Directory
     end
     def addChild(childDir)
         @children.push(childDir)
-    end
-    # getter
-    def myPath
-        @myPath
-    end
-    # getter
-    def children
-        @children
     end
 
     def isDirectory?

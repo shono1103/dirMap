@@ -36,5 +36,8 @@ dirName = getDirNameFromPath(targetPath)
 targetDir = Directory.new(dirName, targetPath)
 buildDirTree(targetDir)
 
+dirMap = GraphViz.new(:G, type: :digraph)
+
+
 
 p targetDir.children
