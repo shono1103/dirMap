@@ -26,6 +26,7 @@ tmp/
 .DS_Store
 .idea/
 .vscode/
+.ruby-lsp/
 
 # Ignore test coverage results
 coverage/

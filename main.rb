@@ -1,15 +1,40 @@
+require "ruby-graphviz"
+require "./tree.rb"
+
+# パスからディレクトリ(ファイル)名を取得する
+def getDirNameFromPath path
+    splitedPath = path.split("/")
+    dirName = splitedPath.last
+end
+
 arguments = ARGV
-root_path = ""
-output_path = ""
+targetPath = ""
+outputPath = ""
+# 引数からターゲットのパスを取得
 if arguments.length == 2
-    root_path = arguments[0]
-    output_path = arguments[1]
+    targetPath = arguments[0]
+    outputPath = arguments[1]
 elsif arguments.length == 0
-    root_path = Dir.pwd
-    output_path = Dir.pwd
+    targetPath = Dir.pwd
+    outputPath = Dir.pwd
 else
     puts "形式が正しくありません"
     exit 1
 end
 
-puts "root = #{root_path} #{root_path.class}, output = #{output_path} #{output_path.class}"
+puts "root = #{targetPath} #{targetPath.class}, output = #{outputPath} #{outputPath.class}"
+
+# ターゲットのディレクトリの存在確認
+unless File.directory?(targetPath) 
+    puts "ターゲットのディレクトリが存在しません"
+    exit 1
+end
+# ディレクトリ名の取得
+dirName = getDirNameFromPath(targetPath)
+
+targetDir = Directory.new(dirName, targetPath)
+treeMaker = TreeMaker.new
+treeMaker.buildDirTree(targetDir)
+
+
+p targetDir.getChildren
