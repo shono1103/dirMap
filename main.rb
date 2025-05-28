@@ -14,6 +14,8 @@ outputPath = ""
 if arguments.length == 2
     targetPath = arguments[0]
     outputPath = arguments[1]
+elsif arguments.length == 1
+    targetPath = arguments[0]
 elsif arguments.length == 0
     targetPath = Dir.pwd
     outputPath = Dir.pwd
@@ -34,9 +36,13 @@ dirName = getDirNameFromPath(targetPath)
 
 # ディレクトリ構造のtreeデータ作成
 targetDir = Directory.new(dirName, targetPath)
-buildDirTree(targetDir)
+dirMap = GraphViz.new(:G, type: :digraph, rankdir: "LR")
+targetDirNode = dirMap.add_nodes(targetDir.myDirName, shape: "box", color: targetDir.isDirectory? ? "blue" : "red")
+buildDirTree(targetDir, dirMap, targetDirNode)
 
-dirMap = GraphViz.new(:G, type: :digraph)
+FileUtils.mkdir_p("./graphviz")
+
+dirMap.output(png: "./graphviz/output.png", dot: "./graphviz/output.dot")
 
 
 
