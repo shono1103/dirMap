@@ -1,20 +1,17 @@
-class TreeMaker
-
-    def buildDirTree(parentDir)
-        childrenDirName = Dir.entries(parentDir.getMyPath).reject{|i| i == "." || i == ".."}
-        childrenDirName.each do |childDirName|
-            childDir = Directory.new(childDirName, parentDir.getMyPath + "/" + childDirName)
-            parentDir.addChild(childDir)
-            # パスがディレクトリを示していればその
-            if File.directory?(childDir.getMyPath)
-                buildDirTree(childDir)
-            end
+def buildDirTree(parentDir)
+    childrenDirName = Dir.entries(parentDir.myPath).reject{|i| i == "." || i == ".."}
+    childrenDirName.each do |childDirName|
+        childDir = Directory.new(childDirName, parentDir.myPath + "/" + childDirName)
+        parentDir.addChild(childDir)
+        # パスがディレクトリを示していればその
+        if childDir.isDirectory?
+            buildDirTree(childDir)
         end
     end
+end
 
-    def getDirTree()
-        @rootDir
-    end
+def buildDirMap(parentDir, dirMap)
+    
 end
 
 
@@ -27,11 +24,16 @@ class Directory
     def addChild(childDir)
         @children.push(childDir)
     end
-    
-    def getMyPath
+    # getter
+    def myPath
         @myPath
     end
-    def getChildren
+    # getter
+    def children
         @children
+    end
+
+    def isDirectory?
+      File.directory?(@myPath)
     end
 end

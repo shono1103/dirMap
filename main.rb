@@ -32,9 +32,9 @@ end
 # ディレクトリ名の取得
 dirName = getDirNameFromPath(targetPath)
 
+# ディレクトリ構造のtreeデータ作成
 targetDir = Directory.new(dirName, targetPath)
-treeMaker = TreeMaker.new
-treeMaker.buildDirTree(targetDir)
+buildDirTree(targetDir)
 
 
-p targetDir.getChildren
+p targetDir.children
